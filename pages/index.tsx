@@ -2,17 +2,25 @@ import GoAbout from "@/components/navbar";
 import Modal_Alarm from "@/components/modal_alarm";
 import Icons from "@/components/icons";
 import dayjs from "dayjs";
+import "dayjs/locale/ko";
 dayjs.locale("ko");
 import { useState, useEffect } from "react";
 export default function Alarm() {
-  let year: string = dayjs().format("YYYY");
-  let month: string = dayjs().format("MM");
-  let day: string = dayjs().format("DD");
-  let week: string = dayjs().format("dddd");
-  let hour: string = dayjs().format("HH");
-  let minute: string = dayjs().format("mm");
-  let second: string = dayjs().format("ss");
-  const [nowTime, setNowTime] = useState(Date.now());
+  let year: string = dayjs(new Date()).format("YYYY");
+  let month: string = dayjs(new Date()).format("MM");
+  let day: string = dayjs(new Date()).format("DD");
+  let week: string = dayjs(new Date()).format("dddd");
+  let hour: string = dayjs(new Date()).format("HH");
+  let minute: string = dayjs(new Date()).format("mm");
+  let second: string = dayjs(new Date()).format("ss");
+
+  const [nowTime, setNowTime] = useState(new Date());
+  useEffect(() => {
+    const id = setInterval(() => {
+      setNowTime(new Date());
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
 
   return (
     <main className="bg-orange-50 text-center">
@@ -26,7 +34,9 @@ export default function Alarm() {
           </p>
         </div>
         <div>
-          <span className="text-5xl mr-4">오후</span>
+          <span className="text-5xl mr-4">
+            {Number(hour) > 12 ? `오후` : `오전`}
+          </span>
           <span className="text-9xl">
             {hour}:{minute}:{second}
           </span>
