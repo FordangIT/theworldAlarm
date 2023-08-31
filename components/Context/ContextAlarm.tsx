@@ -1,9 +1,13 @@
 import React, { useState, useEffect, createContext } from "react";
 import months from "@/public/data";
-const alarm = new Audio();
+import useSound from "use-sound";
+
 export const AlarmContext = createContext();
 
 function ContextAlarm({ children }) {
+  const [alarm] = useSound(
+    "/public/mixkit-casino-win-alarm-and-coins-1990.mp3"
+  );
   const [hourDigital, setHourDigital] = useState("");
   const [minutesDigital, setMinutesDigital] = useState("");
   const [amPm, setAmPm] = useState("");
