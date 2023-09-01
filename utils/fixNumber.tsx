@@ -11,7 +11,7 @@ function fixNumber(value: number[]) {
   return value;
 }
 
-export {};
+export { minutesNumber, hourNumber };
 
 //["f", "o", "o"]
 //Array.from("foo");
