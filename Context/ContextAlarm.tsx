@@ -1,10 +1,16 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  createContext,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import months from "@/public/data";
+import { TYPE_ContextProps } from "@/Types/alarm";
+const alarm = new Audio("/alarmSounds.mp3");
+export const AlarmContext = createContext<TYPE_ContextProps | null>(null);
 
-const alarm = new Audio("../public/mp3/alarmSounds.mp3");
-export const AlarmContext = createContext<number | null>(null);
-type TimeProps = {};
-function ContextAlarm({ children }) {
+function ContextAlarm({ children }: { children: React.ReactNode }) {
   const [hourDigital, setHourDigital] = useState("");
   const [minutesDigital, setMinutesDigital] = useState("");
   const [amPm, setAmPm] = useState("");
