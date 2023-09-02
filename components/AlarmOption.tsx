@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { minutesNumber, hourNumber } from "../utils/fixNumber";
 import useSelect from "@/hook/useSelect";
 import { AlarmContext } from "@/Context/ContextAlarm";
-
+import { TYPE_ContextProps } from "@/Types/alarm";
 const AlarmOption = () => {
   const [hour, setHour] = useSelect("Hour");
   const [minutes, setMiutes] = useSelect("Minutes");
