@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 export interface TYPE_ContextProps {
   hourDigital?: string;
   minutesDigital?: string;
@@ -10,4 +11,10 @@ export interface TYPE_ContextProps {
   pauseAlarm?: Dispatch<SetStateAction<string>>;
   hasAlarm?: boolean;
   setHasAlarm?: Dispatch<SetStateAction<boolean>>;
+}
+export interface TYPE_ContextPropsAlarmOption {
+  hasAlarm: boolean;
+  pauseAlarm: Dispatch<SetStateAction<string>>;
+  setHasAlarm: Dispatch<SetStateAction<boolean>>;
+  setAlarmTime?: Dispatch<SetStateAction<string>>;
 }
