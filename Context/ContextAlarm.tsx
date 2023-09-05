@@ -1,14 +1,17 @@
 import React, { useState, useEffect, createContext } from "react";
 import months from "@/public/data";
 import { TYPE_ContextProps } from "@/Types/alarm";
-const alarm = new Audio("/alarmSounds.mp3");
+const alarm = new Audio();
+alarm.src = "/alarmSounds.mp3";
+//alarm.play() // 재생
+//alarm.pause() // 정지
 
 export const AlarmContext = createContext<TYPE_ContextProps | null>(null);
 
 type ContextProviderProps = {
   children: React.ReactNode;
 };
-const ContextAlarm = ({ children }: ContextProviderProps) => {
+export const ContextAlarm = ({ children }: ContextProviderProps) => {
   const [hourDigital, setHourDigital] = useState("");
   const [minutesDigital, setMinutesDigital] = useState("");
   const [amPm, setAmPm] = useState("");
@@ -76,5 +79,3 @@ const ContextAlarm = ({ children }: ContextProviderProps) => {
     </AlarmContext.Provider>
   );
 };
-
-export default ContextAlarm;
