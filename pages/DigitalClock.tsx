@@ -1,3 +1,4 @@
+"use client";
 import { AlarmContext } from "@/Context/ContextAlarm";
 import React, { useContext } from "react";
 

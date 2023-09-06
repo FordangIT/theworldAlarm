@@ -1,3 +1,4 @@
+"use client";
 import { useState, useCallback } from "react";
 import { Set_Alarm } from "./set_alarm";
 export default function Modal_Alarm() {

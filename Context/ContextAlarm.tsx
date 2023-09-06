@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect, createContext } from "react";
 import months from "@/public/data";
 import { TYPE_ContextProps } from "@/Types/alarm";

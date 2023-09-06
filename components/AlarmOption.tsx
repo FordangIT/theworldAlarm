@@ -1,4 +1,5 @@
 //알람 설정하는 컴포넌트
+"use client";
 import React, { useContext } from "react";
 import { minutesNumber, hourNumber } from "../utils/fixNumber";
 import useSelect from "@/hook/useSelect";
