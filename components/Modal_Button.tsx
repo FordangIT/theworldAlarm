@@ -1,7 +1,8 @@
 "use client";
 import { useState, useCallback } from "react";
-import { Set_Alarm } from "./set_alarm";
-export default function Modal_Alarm() {
+import { Set_Alarm } from "./Set_Alarm";
+//알람설정 버튼 누르면 알람설정 창 나온다.
+export default function Modal_Button() {
   const [showModal, setShowModal] = useState(false);
   const clickModal = useCallback(() => {
     setShowModal(!showModal);

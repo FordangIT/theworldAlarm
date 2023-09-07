@@ -1,8 +1,8 @@
 import React, { PropsWithChildren } from "react";
-import { AlarmOption } from "./AlarmOption";
 interface ModalDefaultType {
   clickModal: () => void;
 }
+//알람 설정하는 창
 export function Set_Alarm({ clickModal }: PropsWithChildren<ModalDefaultType>) {
   return (
     <div className="fixed w-full h-full items-center justify-center ">
