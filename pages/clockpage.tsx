@@ -31,7 +31,9 @@ export default function ClockPage() {
     <div>
       <Header />
       <div className="flex">
-        <Navbar />
+        <div className="h-84">
+          <Navbar />
+        </div>
         <main className="bg-orange-50 text-center">
           <div className="flex justify-end items-start pt-8 pr-6">
             <Icons />

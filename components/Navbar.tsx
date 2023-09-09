@@ -5,19 +5,27 @@ export default function Navbar() {
   const router = useRouter();
   console.log(router);
   return (
-    <div className="h-full w-20 bg-slate-600 z-30">
-      <nav>
+    <div className="h-full w-24 bg-white z-30 flex justify-start">
+      <nav className="">
         <Link href="/">
-          <p>알람</p>
+          <div className="h-24">
+            <div className="pt-10 pl-8">알람</div>
+          </div>
         </Link>
         <Link href="/timerpage">
-          <p> 타이머</p>
+          <div className="h-24">
+            <div className="pt-10 pl-6">타이머</div>
+          </div>
         </Link>
         <Link href="/stopwatchpage">
-          <p> 스톱워치</p>
+          <div className="h-24">
+            <div className="pt-10 pl-4">스톱워치</div>
+          </div>
         </Link>
         <Link href="/clockpage">
-          <p>시계</p>
+          <div className="h-24">
+            <div className="pt-10 pl-8">시계</div>
+          </div>
         </Link>
       </nav>
     </div>
