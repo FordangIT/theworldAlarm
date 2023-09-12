@@ -1,3 +1,4 @@
+"use client";
 import Icons from "@/components/Icons";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
@@ -19,14 +20,27 @@ export default function ClockPage() {
   let minute: string = dayjs(new Date()).format("mm");
   let second: string = dayjs(new Date()).format("ss");
 
-  const [nowTime, setNowTime] = useState(new Date());
+  const [nowYear, setNowYear] = useState(year);
+  const [nowMonth, setNowMonth] = useState(month);
+  const [nowDay, setNowDay] = useState(day);
+  const [nowWeek, setNowWeek] = useState(week);
+  const [nowHour, setNowHour] = useState(hour);
+  const [nowMinute, setNowMinute] = useState(minute);
+  const [nowSecond, setNowSecond] = useState(second);
   useEffect(() => {
-    const id = setInterval(() => {
-      setNowTime(new Date());
+    const timer = setInterval(() => {
+      setNowYear(year);
+      setNowMonth(month);
+      setNowDay(day);
+      setNowWeek(week);
+      setNowHour(hour);
+      setNowMinute(minute);
+      setNowSecond(second);
     }, 1000);
-    return () => clearInterval(id);
-  }, []);
-  console.log("확인", nowTime);
+    return () => clearInterval(timer);
+  }, [year, month, day, week, hour, minute, second]);
+  console.log("확인");
+
   return (
     <div>
       <Header />
@@ -34,27 +48,30 @@ export default function ClockPage() {
         <div className="h-84">
           <Navbar />
         </div>
-        <main className="bg-orange-50 text-center">
-          <div className="flex justify-end items-start pt-8 pr-6">
+        <div className="bg-orange-50 w-full">
+          <div className="flex justify-end items-start pt-8 pr-3">
             <Icons />
           </div>
-          <div className="py-40">
+          <div className="py-40 text-center pr-4">
             <div className="mb-4">
-              <p className="text-3xl text-gray-500 ml-20">
-                {year}년 {month}월 {day}일 {week}
+              <p
+                className="text-3xl text-gray-500 ml-20"
+                suppressHydrationWarning
+              >
+                {nowYear}년 {nowMonth}월 {nowDay}일 {nowWeek}
               </p>
             </div>
             <div>
-              <span className="text-5xl mr-4">
-                {Number(hour) > 12 ? `오후` : `오전`}
+              <span className="text-5xl mr-4" suppressHydrationWarning>
+                {Number(nowHour) > 12 ? `오후` : `오전`}
               </span>
-              <span className="text-9xl">
-                {hour}:{minute}:{second}
+              <span className="text-9xl" suppressHydrationWarning>
+                {nowHour}:{nowMinute}:{nowSecond}
               </span>
               <Modal_Button />
             </div>
           </div>
-        </main>
+        </div>
       </div>
     </div>
   );
