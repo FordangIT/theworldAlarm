@@ -1,9 +1,12 @@
 import React, { PropsWithChildren } from "react";
+import useSelect from "@/hook/useSelect";
 interface ModalDefaultType {
   clickModal: () => void;
 }
 //알람 설정하는 창
 export function Set_Alarm({ clickModal }: PropsWithChildren<ModalDefaultType>) {
+  const [hourIsOpen, hourRef, hourHandler] = useSelect(false);
+  const [minuteIsOpen, minuteRef, minuteHandler] = useSelect(false);
   return (
     <div className="fixed w-full h-full items-center justify-center ">
       <div
@@ -15,6 +18,7 @@ export function Set_Alarm({ clickModal }: PropsWithChildren<ModalDefaultType>) {
           }
         }}
       ></div>
+      <div className="fixed w-96 h-96 bg-white"></div>
     </div>
   );
 }
