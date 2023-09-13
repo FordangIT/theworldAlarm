@@ -1,10 +1,25 @@
-// "use client";
-// import { useState } from "react";
+"use client";
+import { useState, useEffect, useRef } from "react";
 
-// export default function useSelect(initialValue: string) {
-//   const [value, setValue] = useState(initialValue);
-//   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     setValue(e.target.value);
-//   };
-//   return <input value={value} onChange={handleChange} />;
-// }
+const useSelect = (initialState) => {
+  const [isOpen, setIsOpen] = useState(initialState);
+  const ref = useRef(null);
+  const removeHandler = () => {
+    setIsOpen(!isOpen);
+  };
+  useEffect(() => {
+    const onClick = (e) => {
+      if (ref.current !== null && !ref.current.contains(e.target)) {
+        setIsOpen(!isOpen);
+      }
+    };
+    if (isOpen) {
+      window.addEventListener("click", onClick);
+    }
+    return () => {
+      window.removeEventListener("click", onClick);
+    };
+  }, [isOpen]);
+  return [isOpen, ref, removeHandler];
+};
+export default useSelect;
