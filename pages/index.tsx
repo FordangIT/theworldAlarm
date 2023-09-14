@@ -4,7 +4,6 @@ import Modal_Button from "@/components/Modal_Button";
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
-var _ = require("preline");
 
 export const metadata = {
   title: "The World Alarm",
@@ -22,9 +21,6 @@ export default function ClockPage() {
   }, []);
   console.log(nowTime.getHours());
 
-  useEffect(() => {
-    import(_);
-  }, []);
   return (
     <div>
       <Header />

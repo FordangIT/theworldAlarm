@@ -4,9 +4,7 @@ import { useState, useEffect, useRef } from "react";
 const useSelect = (initialState) => {
   const [isOpen, setIsOpen] = useState(initialState);
   const ref = useRef(null);
-  const removeHandler = () => {
-    setIsOpen(!isOpen);
-  };
+
   useEffect(() => {
     const onClick = (e) => {
       if (ref.current !== null && !ref.current.contains(e.target)) {
@@ -20,6 +18,6 @@ const useSelect = (initialState) => {
       window.removeEventListener("click", onClick);
     };
   }, [isOpen]);
-  return [isOpen, ref, removeHandler];
+  return [ref, isOpen, setIsOpen];
 };
 export default useSelect;
