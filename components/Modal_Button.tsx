@@ -16,7 +16,7 @@ export default function Modal_Button() {
         onClick={clickModal}
         className="my-8 ml-16 bg-blue-600 hover:bg-blue-400 text-white font-bold py-2 px-8 rounded-full"
       >
-        Button
+        알람 설정
       </button>
     </div>
   );
