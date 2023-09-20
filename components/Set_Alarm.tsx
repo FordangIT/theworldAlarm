@@ -1,6 +1,7 @@
 import React, { PropsWithChildren, useEffect } from "react";
 import useSelect from "@/hook/useSelect";
 import { useState, useRef } from "react";
+import Alarming from "./Alarming";
 interface ModalDefaultType {
   clickModal: () => void;
 }
@@ -84,6 +85,9 @@ const objListMinutes = [
   { code: "58", name: "10", key: "key_58" },
   { code: "59", name: "11", key: "key_59" },
 ];
+const SelectHours = React.createContext(0);
+const SelectMinutes = React.createContext(0);
+const SelectSeconds = React.createContext(0);
 //알람 설정하는 창
 export function Set_Alarm({ clickModal }: PropsWithChildren<ModalDefaultType>) {
   const [dropDownListAmPm, setDropDownListAmPm] = useState([]);
@@ -151,6 +155,11 @@ export function Set_Alarm({ clickModal }: PropsWithChildren<ModalDefaultType>) {
         </select>
         분
       </div>
+      <Alarming
+        ampm={selectAmPmValue}
+        hour={selectHourValue}
+        minutes={selectMinutesValue}
+      />
     </div>
   );
 }
