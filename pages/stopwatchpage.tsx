@@ -3,14 +3,13 @@ import Icons from "@/components/Icons";
 import { useRef, useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
-export const formatTime = (timeInMillis: number): string => {
-  const hours = Math.floor(timeInMillis / 3600000);
-  const minutes = Math.floor((timeInMillis % 360000) / 60000);
-  const seconds = Math.floor((timeInMillis % 60000) / 1000);
-  const formattedTime = `${hours}:${minutes < 10 ? "0" : ""}${minutes}:${
-    seconds < 10 ? "0" : ""
-  }${seconds}`;
-  return formattedTime;
+export const formatTime = (time: number): string => {
+  const minutes = Math.floor(time / 6000);
+  const seconds = Math.floor((time / 100) % 60);
+  const milliseconds = (time % 100).toString().padStart(2, "0");
+  return `${minutes.toString().padStart(2, "0")}:${seconds
+    .toString()
+    .padStart(2, "0")}:${milliseconds}`;
 };
 export default function StopWatch() {
   const [running, setRunning] = useState<boolean>(false);
@@ -53,17 +52,22 @@ export default function StopWatch() {
             <Icons />
           </div>
           {/*여기부터가 스톱워치 만드는 부분*/}
-          <div gap={12}>
-            <div>{formatTime(time)}</div>
-            <div>
-              <button onClick={startStopWatch}>
+          <div className="py-40 text-center pr-4">
+            <div className="text-9xl">{formatTime(time)}</div>
+            <div className="mt-4">
+              <button
+                className="text-3xl bg-orange-600 py-2 px-3 mr-1"
+                onClick={resetStopWatch}
+              >
+                Reset
+              </button>
+              <button
+                className="text-3xl bg-green-800 py-2 px-3 ml-1"
+                onClick={startStopWatch}
+              >
                 {running ? "Stop" : "Start"}
               </button>
-
-              <button onClick={resetStopWatch}>Reset</button>
             </div>
-            <div laps={laps} setLaps={setLaps}></div>
-            {running && <button onClick={recordLap}>Lap</button>}
           </div>
         </div>
       </div>
