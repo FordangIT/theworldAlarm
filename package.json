@@ -20,7 +20,6 @@
     "dayjs": "^1.11.9",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
-    "file-loader": "^6.2.0",
     "next": "13.4.19",
     "postcss": "8.4.28",
     "preline": "^1.9.0",
@@ -32,6 +31,7 @@
     "use-sound": "^4.0.1"
   },
   "devDependencies": {
-    "daisyui": "^3.7.4"
+    "daisyui": "^3.7.4",
+    "file-loader": "^6.2.0"
   }
 }
