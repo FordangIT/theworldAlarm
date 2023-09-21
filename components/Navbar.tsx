@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 export default function Navbar() {
   const router = useRouter();
-  console.log(router);
   return (
     <div className="h-full w-24 bg-white z-30 flex justify-start">
       <nav className="">

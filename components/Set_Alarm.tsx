@@ -85,9 +85,7 @@ const objListMinutes = [
   { code: "58", name: "10", key: "key_58" },
   { code: "59", name: "11", key: "key_59" },
 ];
-const SelectHours = React.createContext(0);
-const SelectMinutes = React.createContext(0);
-const SelectSeconds = React.createContext(0);
+
 //알람 설정하는 창
 export function Set_Alarm({ clickModal }: PropsWithChildren<ModalDefaultType>) {
   const [dropDownListAmPm, setDropDownListAmPm] = useState([]);
@@ -115,51 +113,63 @@ export function Set_Alarm({ clickModal }: PropsWithChildren<ModalDefaultType>) {
         }}
       ></div>
       {/*모달창 흰색깔로*/}
-      <div className="fixed w-96 h-96 bg-white">
-        <select
-          className="m-1 btn"
-          onClick={(e) => setSelectAmPmValue(e.target.value)}
-        >
-          {dropDownListAmPm.map(function (data) {
-            return (
-              <option key={data.key} value={data.code}>
-                {data.name}
-              </option>
-            );
-          })}
-        </select>
-        <select
-          className="m-1 btn"
-          onClick={(e) => setSelectHourValue(e.target.value)}
-        >
-          {dropDownListHour.map(function (data) {
-            return (
-              <option key={data.key} value={data.code}>
-                {data.name}
-              </option>
-            );
-          })}
-        </select>
-        시
-        <select
-          className="m-1 btn"
-          onClick={(e) => setSelectMinutesValue(e.target.value)}
-        >
-          {dropDownListMinutes.map(function (data) {
-            return (
-              <option key={data.key} value={data.code}>
-                {data.name}
-              </option>
-            );
-          })}
-        </select>
-        분
+      <div className="fixed w-96 h-64 bg-white">
+        <div className="flex flex-col">
+          <div className="py-4 px-3 mt-8">
+            <select
+              className="m-3 btn"
+              onClick={(e) => setSelectAmPmValue(e.target.value)}
+            >
+              {dropDownListAmPm.map(function (data) {
+                return (
+                  <option key={data.key} value={data.code}>
+                    {data.name}
+                  </option>
+                );
+              })}
+            </select>
+            <select
+              className="ml-3 mr-1 btn"
+              onClick={(e) => setSelectHourValue(e.target.value)}
+            >
+              {dropDownListHour.map(function (data) {
+                return (
+                  <option key={data.key} value={data.code}>
+                    {data.name}
+                  </option>
+                );
+              })}
+            </select>
+            <span className="text-base">시</span>
+            <select
+              className="ml-3 mr-1 btn"
+              onClick={(e) => setSelectMinutesValue(e.target.value)}
+            >
+              {dropDownListMinutes.map(function (data) {
+                return (
+                  <option key={data.key} value={data.code}>
+                    {data.name}
+                  </option>
+                );
+              })}
+            </select>
+            <span className="text-base">분</span>
+          </div>
+          <div>
+            <button
+              className="px-4 py-2 mt-6 bg-blue-600 hover:bg-blue-400 text-white font-bold  rounded-full"
+              onClick={(e: React.MouseEvent) => {
+                e.preventDefault();
+                if (clickModal) {
+                  clickModal();
+                }
+              }}
+            >
+              알람 설정
+            </button>
+          </div>
+        </div>
       </div>
-      <Alarming
-        ampm={selectAmPmValue}
-        hour={selectHourValue}
-        minutes={selectMinutesValue}
-      />
     </div>
   );
 }
