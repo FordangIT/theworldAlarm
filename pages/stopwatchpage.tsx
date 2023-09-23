@@ -1,3 +1,4 @@
+import Seo from "@/components/seo";
 import { time } from "console";
 import Icons from "@/components/Icons";
 import { useRef, useState, useEffect } from "react";
@@ -42,6 +43,7 @@ export default function StopWatch() {
   };
   return (
     <div>
+      <Seo title="Stopwatch" />
       <Header />
       <div className="flex">
         <div className="h-84">

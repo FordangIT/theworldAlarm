@@ -1,4 +1,5 @@
 "use client";
+import Seo from "@/components/seo";
 import Icons from "@/components/Icons";
 import Modal_Button from "@/components/Modal_Button";
 import { useState, useEffect } from "react";
@@ -23,6 +24,7 @@ export default function ClockPage() {
 
   return (
     <div>
+      <Seo title="Alarm" />
       <Header />
       <div className="flex">
         <div className="h-84">

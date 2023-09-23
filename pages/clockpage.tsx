@@ -1,4 +1,5 @@
 "use client";
+import Seo from "@/components/seo";
 import Icons from "@/components/Icons";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
@@ -23,6 +24,7 @@ export default function ClockPage() {
   console.log(nowTime.getHours());
   return (
     <div>
+      <Seo title="Clock" />
       <Header />
       <div className="flex">
         <div className="h-84">
