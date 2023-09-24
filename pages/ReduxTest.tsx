@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "../hook/reduxHooks";
 import { increment, decrement } from "@/redux/reducer/counterSlice";
 import { selectAuthState, setAuthState } from "@/redux/reducer/authSlice";
 import { wrapper } from "@/redux/store";
@@ -22,6 +22,22 @@ const ReduxTest = function () {
       >
         {authState ? "Logout" : "LogIN"}
       </button>
+      <button onClick={() => dispatch(increment())}>increment</button>
+      <span>{count}</span>
+      <button onClick={() => dispatch(decrement())}>decrement</button>
     </div>
   );
 };
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) =>
+    async ({ params }) => {
+      store.dispatch(increment());
+      store.dispatch(setAuthState(false));
+      console.log("state on server", store.getState());
+      return {
+        props: {},
+      };
+    }
+);
+
+export default ReduxTest;
