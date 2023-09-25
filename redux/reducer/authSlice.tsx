@@ -1,4 +1,3 @@
-import { HYDRATE } from "next-redux-wrapper";
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
@@ -16,13 +15,6 @@ export const authSlice = createSlice({
   reducers: {
     setAuthState(state, action) {
       state.authState = action.payload;
-    },
-  },
-  extraReducers: {
-    [HYDRATE]: (state, action) => {
-      return {
-        ...state,
-      };
     },
   },
 });

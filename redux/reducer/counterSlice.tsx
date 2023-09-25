@@ -1,5 +1,4 @@
 //액션과 리듀서 역할을 할 slice를 만든다 !!
-import { HYDRATE } from "next-redux-wrapper";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface CounterState {
@@ -19,15 +18,6 @@ const counterSlice = createSlice({
     },
     decrement: (state) => {
       state.value -= 1;
-    },
-  },
-  /*페이지 이동시 상태 초기화가 필요한 경우 추가*/
-  extraReducers: {
-    [HYDRATE]: (state, action) => {
-      return {
-        ...state,
-        //action.payload.counter
-      };
     },
   },
 });

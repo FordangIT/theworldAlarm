@@ -1,10 +1,14 @@
 import React, { PropsWithChildren, useEffect } from "react";
-import useSelect from "@/hook/useSelect";
 import { useState, useRef } from "react";
 import Alarming from "./Alarming";
 import { useAppDispatch, useAppSelector } from "@/hook/reduxHooks";
 import { wrapper } from "@/redux/store";
-import { setAlarmState } from "@/redux/reducer/alarmSlice";
+import {
+  selectAmpm,
+  selectHour,
+  selectMinutes,
+  setAlarm,
+} from "@/redux/reducer/alarmSlice";
 interface ModalDefaultType {
   clickModal: () => void;
 }
@@ -92,9 +96,10 @@ const objListMinutes = [
 //알람 설정하는 창
 export function Set_Alarm({ clickModal }: PropsWithChildren<ModalDefaultType>) {
   const dispatch = useAppDispatch();
-  const alarmAmpm = useAppSelector((state) => state.alarmTimeSave.ampm);
-  const alarmHour = useAppSelector((state) => state.alarmTimeSave.hour);
-  const alarmMinutes = useAppSelector((state) => state.alarmTimeSave.minutes);
+  const alarmAmpm = useAppSelector((state) => state.alarm.ampm);
+  const alarmHour = useAppSelector((state) => state.alarm.hour);
+  const alarmMinutes = useAppSelector((state) => state.alarm.minutes);
+
   const [dropDownListAmPm, setDropDownListAmPm] = useState([]);
   const [selectAmPmValue, setSelectAmPmValue] = useState();
   const [dropDownListHour, setDropDownListHour] = useState([]);
@@ -127,7 +132,8 @@ export function Set_Alarm({ clickModal }: PropsWithChildren<ModalDefaultType>) {
               className="m-3 btn"
               onClick={(e) => {
                 setSelectAmPmValue(e.target.value);
-                dispatch(setAlarmState(selectAmPmValue));
+                dispatch(setAlarm(selectAmPmValue));
+                console.log(alarmSlice);
               }}
             >
               {dropDownListAmPm.map(function (data) {
@@ -142,7 +148,8 @@ export function Set_Alarm({ clickModal }: PropsWithChildren<ModalDefaultType>) {
               className="ml-3 mr-1 btn"
               onClick={(e) => {
                 setSelectHourValue(e.target.value);
-                dispatch(setAlarmState(selectHourValue));
+                dispatch(setAlarm(selectHourValue));
+                console.log(alarmSlice);
               }}
             >
               {dropDownListHour.map(function (data) {
@@ -158,7 +165,8 @@ export function Set_Alarm({ clickModal }: PropsWithChildren<ModalDefaultType>) {
               className="ml-3 mr-1 btn"
               onClick={(e) => {
                 setSelectMinutesValue(e.target.value);
-                dispatch(setAlarmState(selectMinutesValue));
+                dispatch(setAlarm(selectMinutesValue));
+                console.log(alarmSlice);
               }}
             >
               {dropDownListMinutes.map(function (data) {
