@@ -7,7 +7,7 @@ import {
 import { createWrapper, HYDRATE } from "next-redux-wrapper";
 import counterReducer from "../reducer/counterSlice";
 import authSlice from "../reducer/authSlice";
-import alarmSlice from "../reducer/alarmSlice";
+import alarmSlice, { alarmReducer } from "../reducer/alarmSlice";
 import logger from "redux-logger";
 import { Reducer } from "react";
 
@@ -15,7 +15,7 @@ const reducer = (state: any, action: AnyAction): CombinedState => {
   if (action.type === HYDRATE) return { ...state, ...action.payload };
   const combineReducer = combineReducers({
     counter: counterReducer,
-    alarmTimeSave: alarmSlice.reducer,
+    alarmTimeSave: alarmReducer,
   });
   return combineReducer(state, action);
 };
@@ -29,7 +29,7 @@ const makeStore = () =>
 
 const store = makeStore();
 
-export type AppStore = ReturnType<typeof makeStore>;
 export type RootState = ReturnType<typeof store.getState>;
+export type AppStore = ReturnType<typeof makeStore>;
 export type AppDispatch = typeof store.dispatch;
 export const wrapper = createWrapper(makeStore);

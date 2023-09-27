@@ -1,13 +1,18 @@
-import React, { PropsWithChildren, useEffect } from "react";
-import { useState, useRef } from "react";
-import Alarming from "./Alarming";
+import React, {
+  PropsWithChildren,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 import { useAppDispatch, useAppSelector } from "@/hook/reduxHooks";
 import { wrapper } from "@/redux/store";
 import {
+  setAlarmAmpm,
+  setAlarmHour,
+  setAlarmMinutes,
   selectAmpm,
   selectHour,
   selectMinutes,
-  setAlarm,
 } from "@/redux/reducer/alarmSlice";
 interface ModalDefaultType {
   clickModal: () => void;
@@ -96,22 +101,27 @@ const objListMinutes = [
 //알람 설정하는 창
 export function Set_Alarm({ clickModal }: PropsWithChildren<ModalDefaultType>) {
   const dispatch = useAppDispatch();
-  const alarmAmpm = useAppSelector((state) => state.alarm.ampm);
-  const alarmHour = useAppSelector((state) => state.alarm.hour);
-  const alarmMinutes = useAppSelector((state) => state.alarm.minutes);
+  const alarmAmpm = useAppSelector((state) => state.ampm);
+  const alarmHour = useAppSelector((state) => state.hour);
+  const alarmMinutes = useAppSelector((state) => state.minutes);
 
   const [dropDownListAmPm, setDropDownListAmPm] = useState([]);
-  const [selectAmPmValue, setSelectAmPmValue] = useState();
+  const [selectAmPmValue, setSelectAmPmValue] = useState<string>();
   const [dropDownListHour, setDropDownListHour] = useState([]);
-  const [selectHourValue, setSelectHourValue] = useState();
+  const [selectHourValue, setSelectHourValue] = useState<string>();
   const [dropDownListMinutes, setDropDownListMinutes] = useState([]);
-  const [selectMinutesValue, setSelectMinutesValue] = useState();
+  const [selectMinutesValue, setSelectMinutesValue] = useState<string>();
   useEffect(() => {
     setDropDownListAmPm(objAmPm);
     setDropDownListHour(objListHour);
     setDropDownListMinutes(objListMinutes);
   }, []);
 
+  const setAlarming = useCallback(() => {
+    dispatch(setAlarmAmpm(selectAmPmValue));
+    dispatch(setAlarmHour(selectHourValue));
+    dispatch(setAlarmMinutes(selectMinutesValue));
+  }, []);
   return (
     <div className="fixed w-full h-full items-center justify-center ">
       {/*모달창 띄어진 상태에서 배경 누르면 모달창 꺼지게 한다.*/}
@@ -132,8 +142,6 @@ export function Set_Alarm({ clickModal }: PropsWithChildren<ModalDefaultType>) {
               className="m-3 btn"
               onClick={(e) => {
                 setSelectAmPmValue(e.target.value);
-                dispatch(setAlarm(selectAmPmValue));
-                console.log(alarmSlice);
               }}
             >
               {dropDownListAmPm.map(function (data) {
@@ -148,8 +156,6 @@ export function Set_Alarm({ clickModal }: PropsWithChildren<ModalDefaultType>) {
               className="ml-3 mr-1 btn"
               onClick={(e) => {
                 setSelectHourValue(e.target.value);
-                dispatch(setAlarm(selectHourValue));
-                console.log(alarmSlice);
               }}
             >
               {dropDownListHour.map(function (data) {
@@ -165,8 +171,6 @@ export function Set_Alarm({ clickModal }: PropsWithChildren<ModalDefaultType>) {
               className="ml-3 mr-1 btn"
               onClick={(e) => {
                 setSelectMinutesValue(e.target.value);
-                dispatch(setAlarm(selectMinutesValue));
-                console.log(alarmSlice);
               }}
             >
               {dropDownListMinutes.map(function (data) {
@@ -187,6 +191,13 @@ export function Set_Alarm({ clickModal }: PropsWithChildren<ModalDefaultType>) {
                 if (clickModal) {
                   clickModal();
                 }
+                setAlarming();
+                console.log(selectAmpm, selectHour, selectMinutes);
+                console.log(
+                  selectAmPmValue,
+                  selectHourValue,
+                  selectMinutesValue
+                );
               }}
             >
               알람 설정

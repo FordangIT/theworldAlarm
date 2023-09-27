@@ -18,18 +18,22 @@ export const alarmSlice = createSlice({
   name: "alarm",
   initialState,
   reducers: {
-    setAlarm: (state, action: PayloadAction<AlarmState>) => {
-      state.ampm = action.payload.ampm;
-      state.hour = action.payload.hour;
-      state.minutes = action.payload.minutes;
+    setAlarmAmpm: (state, action: PayloadAction<string>) => {
+      state.ampm = action.payload;
+    },
+    setAlarmHour: (state, action: PayloadAction<number>) => {
+      state.hour = action.payload;
+    },
+    setAlarmMinutes: (state, action: PayloadAction<number>) => {
+      state.minutes = action.payload;
     },
   },
 });
 
-export const { setAlarm } = alarmSlice.actions;
-
-export const selectAmpm = (state: RootState) => state.alarm.ampm;
+export const { actions, reducer: alarmReducer } = alarmSlice;
+export const { setAlarmAmpm, setAlarmHour, setAlarmMinutes } =
+  alarmSlice.actions;
+export default alarmSlice.reducer;
+export const selectAmpm = (state: RootState) => state.ampm;
 export const selectHour = (state: RootState) => state.alarm.hour;
 export const selectMinutes = (state: RootState) => state.alarm.minutes;
-
-export default alarmSlice.reducer;
