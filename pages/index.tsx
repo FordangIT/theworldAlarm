@@ -5,6 +5,7 @@ import Modal_Button from "@/components/Modal_Button";
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
+import Alarming from "@/components/Alarming";
 
 export const metadata = {
   title: "The World Alarm",
@@ -63,6 +64,7 @@ export default function ClockPage() {
               </span>
             </div>
             <Modal_Button />
+            <Alarming />
           </div>
         </div>
       </div>

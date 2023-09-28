@@ -3,7 +3,7 @@ import { increment, decrement } from "@/redux/reducer/counterSlice";
 import { selectAuthState, setAuthState } from "@/redux/reducer/authSlice";
 import { wrapper } from "@/redux/store";
 import { NextPage } from "next";
-
+import Alarming from "@/components/Alarming";
 const ReduxTest = function () {
   const { value: count } = useAppSelector((state) => state.counter);
   const dispatch = useAppDispatch();
@@ -25,6 +25,7 @@ const ReduxTest = function () {
       <button onClick={() => dispatch(increment())}>increment</button>
       <span>{count}</span>
       <button onClick={() => dispatch(decrement())}>decrement</button>
+      <Alarming />
     </div>
   );
 };

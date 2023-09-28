@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import alarmSounds from "../public/alarmSounds.mp3";
-
+import { useAppSelector } from "@/hook/reduxHooks";
 //set alarm에서 선택한 시간 값을 받아온다. 그 값이 현재 시간과 일치할 때 알람 소리를 울린다. !
 export default function Alarming() {
   const sound = new Audio(alarmSounds);
@@ -9,9 +9,10 @@ export default function Alarming() {
   const ampmStand = nowTime.getHours() > 12 ? `오후` : `오전`;
   const hourStand = nowTime.getHours();
   const minutesStand = nowTime.getMinutes();
-  const [alarmState, setAlarmState] = useState(false);
+  const [alarmState, setAlarmState] = useState<HTMLAudioElement>();
+  const alarmAmpm = useAppSelector((state) => state.ampm);
   const soundHandler = () => {
-    sound.play();
+    alarmState && sound.play();
   };
   useEffect(() => {
     const id = setInterval(() => {
@@ -19,8 +20,12 @@ export default function Alarming() {
     }, 1000);
     return () => clearInterval(id);
   }, []);
-  const stateAlarm = () => {
-    setAlarmState(!alarmState);
+
+  useEffect(() => {
+    setAlarmState(new Audio(alarmSounds));
+  }, []);
+  const checking = () => {
+    console.log(alarmAmpm);
   };
   return (
     <div>
@@ -32,6 +37,8 @@ export default function Alarming() {
           {" "}
           누르면 소리가 나나?
         </button>
+        <button onClick={checking}>데이터 가져오기 확인</button>
+        {/* {ampmStand === && hourStand === && minutesStand === ? soundHandler() : } */}
       </div>
     </div>
   );

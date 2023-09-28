@@ -34,6 +34,3 @@ export const { actions, reducer: alarmReducer } = alarmSlice;
 export const { setAlarmAmpm, setAlarmHour, setAlarmMinutes } =
   alarmSlice.actions;
 export default alarmSlice.reducer;
-export const selectAmpm = (state: RootState) => state.ampm;
-export const selectHour = (state: RootState) => state.alarm.hour;
-export const selectMinutes = (state: RootState) => state.alarm.minutes;
