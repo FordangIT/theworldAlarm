@@ -7,23 +7,26 @@ import { RootState } from "@/redux/store";
 //1. 소리를 먼저 나게 해야한다.
 //2. redux로 가져온 알람 설정 시간과 현재 시간과 일치할 때 알람 소리를 울리게 한다.
 export default function Alarming() {
-  const [playing, setPlaying] = useState<boolean>(false);
-  const [sound] = useState<false | HTMLAudioElement>(
-    typeof Audio !== "undefined" && new Audio(alarmSounds)
-  );
+  const [check, setCheck] = useState<HTMLAudioElement>();
+  const [alarmTime, setAlarmTime] = useState(false);
+  const checkClear = () => {
+    check && check.play();
+  };
   useEffect(() => {
-       playing &&
-       ampmStand === alarmAmpm &&
-       hourStand === alarmHour &&
-       minutesStand === alarmMinutes &&
-      ? sound.play() : sound.pause()
-  }, [alarmHour, alarmMinutes, alarmAmpm]);
+    setCheck(new Audio(alarmSounds));
+    alarmingTime();
+  }, []);
 
-  const alarmSound = new Audio(alarmSounds);
   const [nowTime, setNowTime] = useState(new Date());
   const ampmStand = nowTime.getHours() > 12 ? `오후` : `오전`;
-  const hourStand = nowTime.getHours();
-  const minutesStand = nowTime.getMinutes();
+  const firstHourStand =
+    nowTime.getHours() > 12 ? nowTime.getHours() - 12 : nowTime.getHours();
+  const hourStand =
+    firstHourStand < 10 ? `0` + String(firstHourStand) : firstHourStand;
+  const minutesStand =
+    nowTime.getMinutes() < 10
+      ? `0` + String(nowTime.getMinutes())
+      : String(nowTime.getMinutes());
 
   const alarmAmpm = useAppSelector(
     (state: RootState) => state.alarmTimeSave.ampm
@@ -33,10 +36,6 @@ export default function Alarming() {
   );
   const alarmMinutes = useAppSelector((state) => state.alarmTimeSave.minutes);
 
-  // const soundPlayHandler = () => {};
-  // const soundStopHandler = () => {
-  //   console.log(sound.play());
-  // };
   useEffect(() => {
     const id = setInterval(() => {
       setNowTime(new Date());
@@ -44,19 +43,25 @@ export default function Alarming() {
     return () => clearInterval(id);
   }, []);
 
-  useEffect(() => {}, []);
+  const alarmingTime = () => {
+    {
+      ampmStand === alarmAmpm &&
+      hourStand === alarmHour &&
+      minutesStand === alarmMinutes
+        ? setAlarmTime(true)
+        : setAlarmTime(false);
+    }
+  };
 
+  const test = () => {
+    console.log(ampmStand, hourStand, minutesStand);
+  };
   return (
     <div>
-      <div>
-        {/* <button onClick={soundPlayHandler} className="w-8 h-5 bg-black">
-          누르면 소리가 나나?
-        </button> */}
-        {/* {ampmStand === alarmAmpm &&
-          hourStand === alarmHour &&
-          minutesStand === alarmMinutes &&
-          ? soundPlayHandler() : } */}
-      </div>
+      <button onClick={checkClear}>누르면 소리가 나나? </button>
+      <button onClick={test}> 들어오는 시간 확인</button>
+      <div>{minutesStand === alarmMinutes ? "맞아" : "틀려"}</div>
+      {alarmTime ? checkClear() : undefined}
     </div>
   );
 }
