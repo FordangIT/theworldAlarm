@@ -26,48 +26,33 @@ export default function ClockPage() {
   return (
     <div>
       <Seo title="Alarm" />
-      <Header />
-      <div className="flex">
-        <div className="h-84">
-          <Navbar />
-        </div>
-        <div className="bg-orange-50 w-full">
-          <div className="flex justify-end items-start pt-8 pr-3">
-            <Icons />
-          </div>
-          <div className="py-40 text-center pr-4">
-            <div className="mb-4">
-              <p
-                className="text-3xl text-gray-500 ml-20"
-                suppressHydrationWarning
-              >
-                {nowTime.getFullYear()}년 {nowTime.getMonth()}월{" "}
-                {nowTime.getDay()}일 {arrDayStr[nowTime.getDay()]}요일
-              </p>
-            </div>
-            <div>
-              <span className="text-5xl mr-4" suppressHydrationWarning>
-                {nowTime.getHours() > 12 ? `오후` : `오전`}
-              </span>
-              <span className="text-9xl" suppressHydrationWarning>
-                {nowTime.getHours() > 12
-                  ? nowTime.getHours() - 12
-                  : nowTime.getHours()}
-                :
-                {nowTime.getMinutes() < 10
-                  ? `0` + String(nowTime.getMinutes())
-                  : nowTime.getMinutes()}
-                :
-                {nowTime.getSeconds() < 10
-                  ? `0` + String(nowTime.getSeconds())
-                  : nowTime.getSeconds()}
-              </span>
-            </div>
-            <Modal_Button />
-            <Alarming />
-          </div>
-        </div>
+
+      <div className="mb-4">
+        <p className="text-3xl text-gray-500 ml-20" suppressHydrationWarning>
+          {nowTime.getFullYear()}년 {nowTime.getMonth()}월 {nowTime.getDay()}일{" "}
+          {arrDayStr[nowTime.getDay()]}요일
+        </p>
       </div>
+      <div>
+        <span className="text-5xl mr-4" suppressHydrationWarning>
+          {nowTime.getHours() > 12 ? `오후` : `오전`}
+        </span>
+        <span className="text-9xl" suppressHydrationWarning>
+          {nowTime.getHours() > 12
+            ? nowTime.getHours() - 12
+            : nowTime.getHours()}
+          :
+          {nowTime.getMinutes() < 10
+            ? `0` + String(nowTime.getMinutes())
+            : nowTime.getMinutes()}
+          :
+          {nowTime.getSeconds() < 10
+            ? `0` + String(nowTime.getSeconds())
+            : nowTime.getSeconds()}
+        </span>
+      </div>
+      <Modal_Button />
+      <Alarming />
     </div>
   );
 }

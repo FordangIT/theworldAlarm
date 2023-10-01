@@ -1,11 +1,20 @@
 import Header from "./Header";
 import Navbar from "./Navbar";
+import Icons from "./Icons";
 export default function Layout({ children }) {
   return (
     <>
-      {/* <Header />
-      <Navbar /> */}
-      <div>{children}</div>
+      <Header />
+      <div className="flex">
+        <div className="h-84">
+          <Navbar />
+        </div>
+        <div className="bg-orange-50 w-full h-full">
+          <div className="py-40 text-center pr-4 h-3/4">
+            <div>{children}</div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

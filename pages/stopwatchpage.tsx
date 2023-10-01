@@ -44,34 +44,26 @@ export default function StopWatch() {
   return (
     <div>
       <Seo title="Stopwatch" />
-      <Header />
-      <div className="flex">
-        <div className="h-84">
-          <Navbar />
-        </div>
-        <div className="bg-orange-50 w-full">
-          <div className="flex justify-end items-start pt-8 pr-3">
-            <Icons />
-          </div>
-          {/*여기부터가 스톱워치 만드는 부분*/}
-          <div className="py-40 text-center pr-4">
-            <div className="text-9xl">{formatTime(time)}</div>
-            <div className="mt-4">
-              <button
-                className="text-3xl bg-orange-600 py-2 px-3 mr-1"
-                onClick={resetStopWatch}
-              >
-                Reset
-              </button>
-              <button
-                className="text-3xl bg-green-800 py-2 px-3 ml-1"
-                onClick={startStopWatch}
-              >
-                {running ? "Stop" : "Start"}
-              </button>
-            </div>
-          </div>
-        </div>
+
+      {/* <div className="flex justify-end items-start pt-8 pr-3">
+        <Icons />
+      </div> */}
+      {/*여기부터가 스톱워치 만드는 부분*/}
+
+      <div className="text-9xl">{formatTime(time)}</div>
+      <div className="mt-4">
+        <button
+          className="text-3xl bg-orange-600 py-2 px-3 mr-1"
+          onClick={resetStopWatch}
+        >
+          Reset
+        </button>
+        <button
+          className="text-3xl bg-green-800 py-2 px-3 ml-1"
+          onClick={startStopWatch}
+        >
+          {running ? "Stop" : "Start"}
+        </button>
       </div>
     </div>
   );

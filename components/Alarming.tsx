@@ -8,13 +8,12 @@ import { RootState } from "@/redux/store";
 //2. redux로 가져온 알람 설정 시간과 현재 시간과 일치할 때 알람 소리를 울리게 한다.
 export default function Alarming() {
   const [check, setCheck] = useState<HTMLAudioElement>();
-  const [alarmTime, setAlarmTime] = useState(false);
   const checkClear = () => {
     check && check.play();
   };
+  //ssr 방식이라 audio 객체 있는지 확인해야 한다. 맨 처음 렌더링 때 !
   useEffect(() => {
     setCheck(new Audio(alarmSounds));
-    alarmingTime();
   }, []);
 
   const [nowTime, setNowTime] = useState(new Date());
@@ -43,6 +42,8 @@ export default function Alarming() {
     return () => clearInterval(id);
   }, []);
 
+  const [alarmTime, setAlarmTime] = useState(false);
+  //모든 시간이 일치하면 alarmTime 값을 true로 바꿔준다.
   const alarmingTime = () => {
     {
       ampmStand === alarmAmpm &&
@@ -52,15 +53,27 @@ export default function Alarming() {
         : setAlarmTime(false);
     }
   };
-
+  //알람설정 시간이 바뀔 때 alarmingTime 함수 실행
+  useEffect(() => {
+    alarmingTime();
+  }, [alarmAmpm, alarmHour, alarmMinutes]);
   const test = () => {
     console.log(ampmStand, hourStand, minutesStand);
   };
+  const test2 = () => {
+    console.log(alarmAmpm, alarmHour, alarmMinutes);
+  };
+  const mantoman = () => {
+    console.log(ampmStand === alarmAmpm ? true : false);
+    console.log(hourStand === alarmHour ? true : false);
+    console.log(minutesStand === alarmMinutes ? true : false);
+  };
   return (
     <div>
-      <button onClick={checkClear}>누르면 소리가 나나? </button>
-      <button onClick={test}> 들어오는 시간 확인</button>
-      <div>{minutesStand === alarmMinutes ? "맞아" : "틀려"}</div>
+      {/* <button onClick={checkClear}>누르면 소리가 나나? </button>
+      <button onClick={test}> 현재 시간 확인</button>
+      <button onClick={test2}>알람 시간 확인</button>
+      <button onClick={mantoman}>하나하나 뭐가 틀린지 알아보자</button> */}
       {alarmTime ? checkClear() : undefined}
     </div>
   );
