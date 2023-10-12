@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import alarmSounds from "../public/alarmSounds.mp3";
 import { useAppSelector } from "@/hook/reduxHooks";
 import { RootState } from "@/redux/store";
@@ -44,7 +44,7 @@ export default function Alarming() {
 
   const [alarmTime, setAlarmTime] = useState(false);
   //모든 시간이 일치하면 alarmTime 값을 true로 바꿔준다.
-  const alarmingTime = () => {
+  const alarmingTime = useCallback(() => {
     {
       ampmStand === alarmAmpm &&
       hourStand === alarmHour &&
@@ -52,7 +52,7 @@ export default function Alarming() {
         ? setAlarmTime(true)
         : setAlarmTime(false);
     }
-  };
+  }, []);
   //알람설정 시간이 바뀔 때 alarmingTime 함수 실행
   useEffect(() => {
     alarmingTime();
