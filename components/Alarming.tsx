@@ -52,11 +52,11 @@ export default function Alarming() {
         ? setAlarmTime(true)
         : setAlarmTime(false);
     }
-  }, []);
+  }, [ampmStand, hourStand, minutesStand, alarmAmpm, alarmHour, alarmMinutes]);
   //알람설정 시간이 바뀔 때 alarmingTime 함수 실행
   useEffect(() => {
     alarmingTime();
-  }, [alarmAmpm, alarmHour, alarmMinutes]);
+  }, [alarmAmpm, alarmHour, alarmMinutes, alarmingTime]);
   const test = () => {
     console.log(ampmStand, hourStand, minutesStand);
   };

@@ -1,7 +1,11 @@
 import Header from "./Header";
 import Navbar from "./Navbar";
 import Icons from "./Icons";
-export default function Layout({ children }) {
+import { ReactNode } from "react";
+interface Props {
+  children: ReactNode;
+}
+export default function Layout({ children }: Props) {
   return (
     <>
       <Header />
